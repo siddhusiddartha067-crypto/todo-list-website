@@ -8,13 +8,28 @@ function addTask() {
     }
 
     let li = document.createElement("li");
-    li.innerHTML = task + " <button onclick='deleteTask(this)'>Delete</button>";
+
+    let taskText = document.createElement("span");
+    taskText.textContent = task;
+
+    taskText.onclick = function() {
+        taskText.style.textDecoration =
+            taskText.style.textDecoration === "line-through"
+            ? "none"
+            : "line-through";
+    };
+
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+
+    deleteButton.onclick = function() {
+        li.remove();
+    };
+
+    li.appendChild(taskText);
+    li.appendChild(deleteButton);
 
     document.getElementById("taskList").appendChild(li);
 
     input.value = "";
-}
-
-function deleteTask(button) {
-    button.parentElement.remove();
 }
